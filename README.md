@@ -11,7 +11,7 @@ This repository provides tools to export models to ONNX format, apply dynamic qu
 ### Linux
 
 ```bash
-# Create virtual environment (optional but recommended)
+# Create virtual environment (optional)
 python3 -m venv venv
 source venv/bin/activate
 
@@ -32,7 +32,7 @@ wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
 ### macOS
 
 ```bash
-# Create virtual environment (optional but recommended)
+# Create virtual environment (optional)
 python3 -m venv venv
 source venv/bin/activate
 
@@ -50,7 +50,7 @@ wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
 ### Windows
 
 ```powershell
-# Create virtual environment (optional but recommended)
+# Create virtual environment (optional)
 python -m venv venv
 venv\Scripts\activate
 
