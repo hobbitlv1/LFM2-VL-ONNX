@@ -19,7 +19,7 @@ source venv/bin/activate
 pip install optimum[onnxruntime] transformers pillow numpy torch tqdm
 
 # For GPU support
-pip install optimum[onnxruntime-gpu]
+pip install optimum[onnxruntime-gpu] transformers pillow numpy torch tqdm
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
@@ -58,7 +58,7 @@ venv\Scripts\activate
 pip install optimum[onnxruntime] transformers pillow numpy torch tqdm
 
 # For GPU support
-pip install optimum[onnxruntime-gpu]
+pip install optimum[onnxruntime-gpu] transformers pillow numpy torch tqdm
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
