@@ -63,7 +63,8 @@ pip install optimum[onnxruntime-gpu] transformers pillow numpy torch tqdm
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
 
-# To download dataset go to https://cocodataset.org/#download and download 2017 Val images [5K/1GB] and 2017 Train/Val annotations [241MB]
+# To download dataset
+Go to https://cocodataset.org/ and download 2017 Val images [5K/1GB] and 2017 Train/Val annotations [241MB]
 ```
 
 ## Project Structure
