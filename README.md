@@ -16,10 +16,10 @@ python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
-pip install "optimum[onnxruntime]" transformers pillow numpy torch tqdm torchvision
+pip install "optimum[onnxruntime]" transformers pillow numpy torch tqdm torchvision accelerate
 
 # For GPU support
-pip install "optimum[onnxruntime-gpu]" transformers pillow numpy torch tqdm torchvision
+pip install "optimum[onnxruntime-gpu]" transformers pillow numpy torch tqdm torchvision accelerate
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
@@ -37,7 +37,7 @@ python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
-pip install "optimum[onnxruntime]" transformers pillow numpy torch tqdm torchvision
+pip install "optimum[onnxruntime]" transformers pillow numpy torch tqdm torchvision accelerate
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
@@ -57,10 +57,10 @@ python -m venv venv
 venv\Scripts\activate
 
 # Install dependencies
-pip install optimum[onnxruntime] transformers pillow numpy torch tqdm torchvision
+pip install optimum[onnxruntime] transformers pillow numpy torch tqdm torchvision accelerate
 
 # For GPU support
-pip install optimum[onnxruntime-gpu] transformers pillow numpy torch tqdm torchvision
+pip install optimum[onnxruntime-gpu] transformers pillow numpy torch tqdm torchvision accelerate
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
