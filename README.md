@@ -81,7 +81,7 @@ debug_quantization.py       # Debug and compare model outputs
 
 ## Usage
 
-For detailed arguments on any script, run `python scriptname.py -h` to see all available options.
+For detailed arguments on any script, run `python scriptname -h` to see all available options.
 
 ### 1. Export Model to ONNX
 
