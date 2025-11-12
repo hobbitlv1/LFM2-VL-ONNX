@@ -50,6 +50,8 @@ pip install --upgrade transformers
 # Clone the repository and change directory
 git clone https://github.com/hobbitlv1/LFM2-VL-ONNX && cd LFM2-VL-ONNX
 
+
+
 # To download dataset use these commands
 curl -L -o val2017.zip http://images.cocodataset.org/zips/val2017.zip
 curl -L -o annotations_trainval2017.zip http://images.cocodataset.org/annotations/annotations_trainval2017.zip
@@ -123,6 +125,7 @@ Quantize the exported ONNX model to reduce size and improve performance. The scr
 
 ```bash
 # All platforms
+mkdir quant
 python -m dynamically_quantize
 ```
 
