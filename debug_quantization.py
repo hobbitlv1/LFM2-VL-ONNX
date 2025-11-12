@@ -37,6 +37,7 @@ for name, tensor in feats.items():
 models = [
     ("Original", "onnx_optimum/model.onnx"),
     ("Dynamic Quant", "quant/model_dynamic.quant.onnx"),
+    ("Static Quant", "quant/model_static.quant.onnx"),
 ]
 
 print("COMPARING LOGITS")
