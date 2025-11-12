@@ -25,8 +25,10 @@ pip install "optimum[onnxruntime-gpu]" transformers pillow numpy torch tqdm torc
 pip install --upgrade transformers
 
 # To download dataset use these commands
-wget http://images.cocodataset.org/zips/val2017.zip
-wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+curl -L -o val2017.zip http://images.cocodataset.org/zips/val2017.zip
+curl -L -o annotations_trainval2017.zip http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+unzip -q val2017.zip
+unzip -q annotations_trainval2017.zip
 ```
 
 ### macOS
