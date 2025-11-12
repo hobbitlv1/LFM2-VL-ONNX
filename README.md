@@ -27,6 +27,7 @@ pip install --upgrade transformers
 # To download dataset use these commands
 wget http://images.cocodataset.org/zips/val2017.zip
 wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+unzip
 ```
 
 ### macOS
@@ -83,7 +84,7 @@ debug_quantization.py       # Debug and compare model outputs
 
 ## Usage
 
-For detailed arguments on any script, run `python scriptname -h` to see all available options.
+For detailed arguments on any script, run `python -m scriptname -h` to see all available options.
 
 ### 1. Export Model to ONNX
 
