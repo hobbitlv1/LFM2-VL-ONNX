@@ -89,7 +89,7 @@ Export your model to ONNX format using the exporter script:
 
 ```bash
 # Linux/macOS
-python exporter.py --use-cache --run-symbolic-shape-inference
+python exporter --use-cache --run-symbolic-shape-inference
 
 # Windows
 python exporter.py --use-cache --run-symbolic-shape-inference
@@ -101,7 +101,7 @@ Download COCO validation images and annotations from the official COCO dataset w
 
 ```bash
 # Linux/macOS
-python prepare_validation_data.py --annotations annotations/captions_val2017.json --images-dir val2017 --output quant/validation_dataset.pt --limit 10
+python prepare_validation_data --annotations annotations/captions_val2017.json --images-dir val2017 --output quant/validation_dataset.pt --limit 10
 
 # Windows
 python prepare_validation_data.py --annotations annotations\captions_val2017.json --images-dir val2017 --output quant\validation_dataset.pt --limit 10
@@ -113,7 +113,7 @@ Quantize the exported ONNX model to reduce size and improve performance. The scr
 
 ```bash
 # All platforms
-python dynamically_quantize.py
+python dynamically_quantize
 ```
 
 ### 4. Evaluate Model Accuracy
@@ -122,7 +122,7 @@ Compare the original and quantized models on validation data to measure accuracy
 
 ```bash
 # Linux/macOS
-python evaluate_models.py --original onnx_optimum/model.onnx --quantized quant/model_dynamic.quant.onnx --num-samples 10 --verbose
+python evaluate_models --original onnx_optimum/model.onnx --quantized quant/model_dynamic.quant.onnx --num-samples 10 --verbose
 
 # Windows
 python evaluate_models.py --original onnx_optimum\model.onnx --quantized quant\model_dynamic.quant.onnx --num-samples 10 --verbose
@@ -138,7 +138,7 @@ Measure inference latency and throughput to compare performance between original
 
 ```bash
 # Linux/macOS
-python speed_check.py --reference onnx_optimum/model.onnx --candidate quant/model_dynamic.quant.onnx --runs 50 --warmup 10
+python speed_check --reference onnx_optimum/model.onnx --candidate quant/model_dynamic.quant.onnx --runs 50 --warmup 10
 
 # Windows
 python speed_check.py --reference onnx_optimum\model.onnx --candidate quant\model_dynamic.quant.onnx --runs 50 --warmup 10
@@ -152,7 +152,7 @@ For detailed debugging and comparison of model outputs on a single test image, u
 
 ```bash
 # All platforms
-python debug_quantization.py
+python debug_quantization
 ```
 
 The script loads a test image from `val2017/000000000139.jpg` and compares the logits between original and quantized models. It reports logit statistics (min, max, mean, std), top-5 predictions with token IDs and scores, absolute and relative differences between models, and warnings for potential issues like NaN values or unusually large logits. This helps identify if quantization is causing unexpected behavior in model outputs.
