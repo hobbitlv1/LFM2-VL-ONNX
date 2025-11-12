@@ -4,7 +4,7 @@ A toolkit for quantizing, evaluating, and benchmarking ONNX models, specifically
 
 ## Overview
 
-This repository provides tools to export models to ONNX format, apply dynamic quantization to reduce model size, evaluate quantization accuracy on COCO validation dataset, benchmark inference performance, and prepare validation datasets for consistent evaluation.
+This repository provides tools to export models to ONNX format, apply dynamic or static quantization to reduce model size, evaluate quantization accuracy on COCO validation dataset, benchmark inference performance, and prepare validation datasets for consistent evaluation.
 
 ## Installation
 
@@ -89,6 +89,7 @@ evaluate_models.py          # Compare original vs quantized models
 prepare_validation_data.py  # Prepare COCO validation dataset
 speed_check.py              # Benchmark model performance
 debug_quantization.py       # Debug and compare model outputs
+static_quantize.py          # Apply static quantization
 ```
 
 ## Usage
@@ -119,14 +120,24 @@ python -m prepare_validation_data --annotations annotations/captions_val2017.jso
 python -m prepare_validation_data --annotations annotations\captions_val2017.json --images-dir val2017 --output quant\validation_dataset.pt --limit 10
 ```
 
-### 3. Apply Dynamic Quantization
+### 3. Apply Dynamic Quantization or Static Quantization
 
-Quantize the exported ONNX model to reduce size and improve performance. The script loads the preprocessed ONNX model from `onnx_optimum/preprocessed/model.pre.ort.onnx`, applies dynamic quantization with QUInt8 weights, and saves the quantized model to `quant/model_dynamic.quant.onnx`.
+Quantize the exported ONNX model to reduce size and improve performance.
+
+The script `dynamically_quantize` loads the preprocessed ONNX model from `onnx_optimum/preprocessed/model.pre.ort.onnx`, applies dynamic quantization with QUInt8 weights, and saves the quantized model to `quant/model_dynamic.quant.onnx`.
+
+The script `static_quantize` loads the preprocessed ONNX model from `onnx_optimum/preprocessed/model.pre.ort.onnx`, applies static quantization with following default arguments, QUInt8 weights and QUInt8 activations, Quantization format QDQ, Calibration method MinMax(due to ram limits),Op types to quantize ['MatMul', 'Conv'], And uses per-channel quantization for weights.
+Saves the quantized model to `quant/model_static.quant.onnx`.
 
 ```bash
-# All platforms
+# All platforms dynamic 
 mkdir quant
 python -m dynamically_quantize
+```
+```bash
+# All platforms static
+mkdir quant
+python -m static_quantize
 ```
 
 ### 4. Evaluate Model Accuracy
@@ -137,13 +148,20 @@ Compare the original and quantized models on validation data to measure accuracy
 # Linux/macOS
 python -m evaluate_models --original onnx_optimum/model.onnx --quantized quant/model_dynamic.quant.onnx --num-samples 10 --verbose
 
+#For static quantization model
+python -m evaluate_models --original onnx_optimum/model.onnx --quantized quant/model_static.quant.onnx --num-samples 10 --verbose
+
 # Windows
 python -m evaluate_models --original onnx_optimum\model.onnx --quantized quant\model_dynamic.quant.onnx --num-samples 10 --verbose
+
+#For static quantization model
+python -m evaluate_models --original onnx_optimum\model.onnx --quantized quant\model_static.quant.onnx --num-samples 10 --verbose
 ```
 
 The evaluation provides argmax accuracy (percentage of matching top predictions), top-5 overlap metrics, distribution similarity measures like KL divergence and cosine similarity, and per-sample analysis of mismatched predictions.
 
 The model performance varies during evaluation. The random seed is set to 420 which will produce a result of 8/10, you can experiment to get different results.
+Setting random seed to 36 will produce a result of 7/10 for static quantization model.
 
 ### 5. Benchmark Performance
 
@@ -153,8 +171,14 @@ Measure inference latency and throughput to compare performance between original
 # Linux/macOS
 python -m speed_check --reference onnx_optimum/model.onnx --candidate quant/model_dynamic.quant.onnx --runs 50 --warmup 10
 
+#For static model
+python -m speed_check --reference onnx_optimum/model.onnx --candidate quant/model_static.quant.onnx --runs 50 --warmup 10
+
 # Windows
 python -m speed_check --reference onnx_optimum\model.onnx --candidate quant\model_dynamic.quant.onnx --runs 50 --warmup 10
+
+#For static model
+python -m speed_check --reference onnx_optimum\model.onnx --candidate quant\model_static.quant.onnx --runs 50 --warmup 10
 ```
 
 The benchmark reports average latency, percentile latencies (P50, P90, P95, P99), throughput in inferences per second, and relative speedup compared to the baseline model.
