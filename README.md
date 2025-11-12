@@ -24,9 +24,14 @@ pip install "optimum[onnxruntime-gpu]" transformers pillow numpy torch tqdm torc
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
 
+# Clone the repository and move into directory
+git clone https://github.com/hobbitlv1/LFM2-VL-ONNX && cd LFM2-VL-ONNX
+
 # To download dataset use these commands
 wget http://images.cocodataset.org/zips/val2017.zip
 wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+unzip val2017.zip
+unzip annotations_trainval2017.zip
 ```
 
 ### macOS
@@ -41,6 +46,9 @@ pip install "optimum[onnxruntime]" transformers pillow numpy torch tqdm torchvis
 
 # pip will install old version of transformers, to avoid errors update using this command
 pip install --upgrade transformers
+
+# Clone the repository and change directory
+git clone https://github.com/hobbitlv1/LFM2-VL-ONNX && cd LFM2-VL-ONNX
 
 # To download dataset use these commands
 curl -L -o val2017.zip http://images.cocodataset.org/zips/val2017.zip
